@@ -1,0 +1,12 @@
+{
+    "main_title" : "My tasks",
+    "completed" : "Completed — ",
+    "neww" : "New",
+    "priority" : "Priority",
+    "do_before" : "Do before",
+    "none" : "None",
+    "delete" : "Delete",
+    "save" : "SAVE",
+    "low" : "Low",
+    "high" : "High"
+}
