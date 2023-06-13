@@ -8,5 +8,19 @@
     "delete" : "Delete",
     "save" : "SAVE",
     "low" : "Low",
-    "high" : "High"
+    "high" : "High",
+    "what_need_to_do" : "What need to do...",
+    "jan" : "January",
+    "feb" : "February",
+    "mar" : "March",
+    "apr" : "April",
+    "may" : "May",
+    "jun" : "June",
+    "jul" : "July",
+    "aug" : "August",
+    "sep" : "September",
+    "oct" : "October",
+    "nov" : "November",
+    "dec" : "December",
+    "empty_case" : "Please complete a task."
 }

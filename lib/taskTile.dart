@@ -1,0 +1,203 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'customIcons.dart';
+import 'controller.dart';
+import 'newTaskScreen.dart';
+import 'task.dart';
+
+class TaskTile extends StatefulWidget {
+  final Task _task;
+  final int id;
+  const TaskTile({Key? key, required this.id, required Task task})
+      : _task = task,
+        super(key: key);
+
+  @override
+  State<TaskTile> createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
+  bool _isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    _isChecked = widget._task.completed;
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          (widget._task.priority == AppLocalizations.of(context)!.high)
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 5, right: 10),
+                  child: SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: Material(
+                          color: const Color.fromRGBO(254, 216, 214, 1),
+                          child: Checkbox(
+                            value: _isChecked,
+                            checkColor: Colors.white,
+                            activeColor: Colors.green,
+                            side: MaterialStateBorderSide.resolveWith(
+                                (states) => (!_isChecked)
+                                    ? const BorderSide(
+                                        width: 2.2,
+                                        color: Color.fromRGBO(252, 33, 37, 1))
+                                    : const BorderSide(
+                                        width: 2.2,
+                                        color: Color.fromRGBO(0, 0, 0, 0))),
+                            onChanged: (bool? value) {
+                              setState(() {
+                                _isChecked = value!;
+                              });
+                              if (_isChecked) {
+                                context
+                                    .read<Controller>()
+                                    .changeActive(widget.id, true);
+                              } else {
+                                context
+                                    .read<Controller>()
+                                    .changeActive(widget.id, false);
+                              }
+                            },
+                          ))))
+              : Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 5, right: 10),
+                  child: SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: Checkbox(
+                      value: _isChecked,
+                      checkColor: Colors.white,
+                      activeColor: Colors.green,
+                      side: MaterialStateBorderSide.resolveWith(
+                        (states) => (!_isChecked)
+                            ? BorderSide(
+                                width: 2.2,
+                                color: (Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .color)!)
+                            : const BorderSide(
+                                width: 2.2, color: Color.fromRGBO(0, 0, 0, 0)),
+                      ),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _isChecked = value!;
+                        });
+                        if (_isChecked) {
+                          context
+                              .read<Controller>()
+                              .changeActive(widget.id, true);
+                        } else {
+                          context
+                              .read<Controller>()
+                              .changeActive(widget.id, false);
+                        }
+                      },
+                    ),
+                  ),
+                ),
+          (widget._task.priority == AppLocalizations.of(context)!.high)
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 5, right: 2),
+                  child: Icon(
+                    CustomIcons.highIcon,
+                    color: (!_isChecked)
+                        ? const Color(0xFFFF3B30)
+                        : Theme.of(context).textTheme.bodySmall!.color,
+                    size: 16,
+                  ))
+              : const SizedBox.shrink(),
+          (widget._task.priority == AppLocalizations.of(context)!.low)
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 5, right: 2),
+                  child: Icon(
+                    CustomIcons.lowIcon,
+                    color: (Theme.of(context).textTheme.displayMedium!.color)!,
+                    size: 16,
+                  ))
+              : const SizedBox.shrink(),
+          (widget._task.period == "")
+              ? Expanded(
+                  flex: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: Text(
+                      widget._task.action,
+                      style: TextStyle(
+                        color: (_isChecked)
+                            ? Theme.of(context).textTheme.bodySmall!.color
+                            : Theme.of(context).textTheme.bodyMedium!.color,
+                        fontSize: 16,
+                        height: 20 / 16,
+                        decoration: (_isChecked)
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                    ),
+                  ),
+                )
+              : Expanded(
+                  flex: 50,
+                  child: ListTile(
+                    dense: true,
+                    visualDensity:
+                        const VisualDensity(horizontal: 0, vertical: -4),
+                    contentPadding: const EdgeInsets.all(0),
+                    title: Text(
+                      widget._task.action,
+                      style: TextStyle(
+                        color: (_isChecked)
+                            ? Theme.of(context).textTheme.bodySmall!.color
+                            : Theme.of(context).textTheme.bodyMedium!.color,
+                        fontSize: 16,
+                        height: 20 / 16,
+                        decoration: (_isChecked)
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                    ),
+                    subtitle: Text(
+                      widget._task.period,
+                      style: TextStyle(
+                          color: (!_isChecked)
+                              ? const Color(0xFF007AFF)
+                              : Theme.of(context).textTheme.bodySmall!.color,
+                          fontSize: 14,
+                          height: 20 / 14),
+                    ),
+                  ),
+                ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            child: IconButton(
+              padding: const EdgeInsets.only(right: 15, left: 10),
+              constraints: const BoxConstraints(),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NewTask(
+                              task: widget._task,
+                            )));
+              },
+              icon: Icon(
+                Icons.info_outline,
+                size: 25,
+                color: Theme.of(context).textTheme.bodySmall!.color,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
