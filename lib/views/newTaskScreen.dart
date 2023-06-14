@@ -203,7 +203,7 @@ class _NewTaskState extends State<NewTask> {
                           DropdownMenuEntry(
                               value: AppLocalizations.of(context)!.high,
                               label: AppLocalizations.of(context)!.high,
-                              style: TextButton.styleFrom(primary: Colors.red)),
+                              style: TextButton.styleFrom(foregroundColor: Colors.red)),
                         ],
                         inputDecorationTheme: InputDecorationTheme(
                           filled: false,

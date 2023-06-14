@@ -1,2 +1,0 @@
-#!/bin/bash
-dart format newTaskScreen.dart taskTile.dart task.dart main.dart controller.dart model.dart
