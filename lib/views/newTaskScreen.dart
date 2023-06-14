@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'task.dart';
-import 'controller.dart';
+import '../model/task.dart';
+import '../model/controller.dart';
 
 class NewTask extends StatefulWidget {
   final Task? _task;
@@ -202,7 +202,8 @@ class _NewTaskState extends State<NewTask> {
                               label: AppLocalizations.of(context)!.low),
                           DropdownMenuEntry(
                               value: AppLocalizations.of(context)!.high,
-                              label: AppLocalizations.of(context)!.high),
+                              label: AppLocalizations.of(context)!.high,
+                              style: TextButton.styleFrom(primary: Colors.red)),
                         ],
                         inputDecorationTheme: InputDecorationTheme(
                           filled: false,
