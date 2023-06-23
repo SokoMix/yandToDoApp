@@ -16,4 +16,4 @@ App, which can help organize your tasks
 
 ### Download link
 
-You can download .apk there: https://cloud.mail.ru/public/qGLL/PgQbgWzjE
+You can download .apk there: https://github.com/SokoMix/yandToDoApp/releases/download/untagged-98b7248ee10e3b738bb6/releaseV2.zip
