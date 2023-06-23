@@ -6,13 +6,13 @@ App, which can help organize your tasks
 - You can use swipes to mark completed tasks or to delete tasks
 - You can mark "deadline" of tasks
 - All tasks are divided by importance
+- Now, your tasks are saved when you exit the app
 
 ### Screenshots
 
 <image src = "screenshots/scr1.jpeg">
 <image src = "screenshots/scr2.jpeg">
 <image src = "screenshots/scr3.jpeg">
-
 
 ### Download link
 

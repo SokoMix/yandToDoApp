@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'views/homePage.dart';
+import 'homePageView/homePage.dart';
 import 'package:provider/provider.dart';
-import 'model/controller.dart';
+import 'controller/controller.dart';
 
 void main() {
   runApp(const MyApp());

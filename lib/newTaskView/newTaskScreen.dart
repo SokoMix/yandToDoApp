@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import '../model/task.dart';
-import '../model/controller.dart';
+import '../app/task.dart';
+import '../controller/controller.dart';
 
 class NewTask extends StatefulWidget {
   final Task? _task;
+
   const NewTask({Key? key, required Task? task})
       : _task = task,
         super(key: key);
@@ -64,11 +65,29 @@ class _NewTaskState extends State<NewTask> {
     return _selectedDate;
   }
 
-  void _setDate(String? date) {
-    if (date != "" && date != null) {
+  String convertDateTime(DateTime dt) {
+    List<String> months = [
+      AppLocalizations.of(context)!.jan,
+      AppLocalizations.of(context)!.feb,
+      AppLocalizations.of(context)!.mar,
+      AppLocalizations.of(context)!.apr,
+      AppLocalizations.of(context)!.may,
+      AppLocalizations.of(context)!.jun,
+      AppLocalizations.of(context)!.jul,
+      AppLocalizations.of(context)!.aug,
+      AppLocalizations.of(context)!.sep,
+      AppLocalizations.of(context)!.oct,
+      AppLocalizations.of(context)!.nov,
+      AppLocalizations.of(context)!.dec
+    ];
+    return "${dt.day} ${months[dt.month - 1]} ${dt.year}";
+  }
+
+  void _setDate(DateTime? date) {
+    if (date != null) {
       setState(() {
         _isSwitched = true;
-        _toDate = date;
+        _toDate = convertDateTime(date);
       });
     }
   }
@@ -80,7 +99,6 @@ class _NewTaskState extends State<NewTask> {
         _isButtonDisabled = false;
       });
     }
-    _setDate(widget._task?.period);
     _inputCtrl = TextEditingController(text: widget._task?.action ?? "");
     _priorityCtrl = TextEditingController(text: widget._task?.priority ?? "");
     _priority = widget._task?.priority ?? "";
@@ -92,6 +110,7 @@ class _NewTaskState extends State<NewTask> {
     if (_priorityCtrl.text == "") {
       _priorityCtrl.text = AppLocalizations.of(context)!.none;
     }
+    _setDate(widget._task?.deadline);
     return NotificationListener<ScrollNotification>(
       onNotification: (notif) {
         setState(() {
@@ -124,13 +143,12 @@ class _NewTaskState extends State<NewTask> {
                   });
                   if (!_emptyText) {
                     if (widget._task == null) {
-                      context
-                          .read<Controller>()
-                          .addTask(_inputCtrl.text, _priority, _toDate, false);
+                      context.read<Controller>().addTask(_inputCtrl.text,
+                          _priority, _toDate, false, _selectedDate);
                       Navigator.pop(context);
                     } else {
-                      context.read<Controller>().changeTask(
-                          widget._task!, _inputCtrl.text, _priority, _toDate);
+                      context.read<Controller>().changeTask(widget._task!,
+                          _inputCtrl.text, _priority, _toDate, _selectedDate);
                       Navigator.pop(context);
                     }
                   }
@@ -203,7 +221,8 @@ class _NewTaskState extends State<NewTask> {
                           DropdownMenuEntry(
                               value: AppLocalizations.of(context)!.high,
                               label: AppLocalizations.of(context)!.high,
-                              style: TextButton.styleFrom(foregroundColor: Colors.red)),
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Colors.red)),
                         ],
                         inputDecorationTheme: InputDecorationTheme(
                           filled: false,

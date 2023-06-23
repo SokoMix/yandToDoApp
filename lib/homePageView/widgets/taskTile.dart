@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import '../customIcons.dart';
-import '../model/controller.dart';
-import 'newTaskScreen.dart';
-import '../model/task.dart';
+import '../../app/customIcons.dart';
+import '../../controller/controller.dart';
+import '../../newTaskView/newTaskScreen.dart';
+import '../../app/task.dart';
 
 class TaskTile extends StatefulWidget {
   final Task _task;
   final int id;
+
   const TaskTile({Key? key, required this.id, required Task task})
       : _task = task,
         super(key: key);
@@ -19,6 +20,24 @@ class TaskTile extends StatefulWidget {
 
 class _TaskTileState extends State<TaskTile> {
   bool _isChecked = false;
+
+  String convertDateTime(DateTime dt) {
+    List<String> months = [
+      AppLocalizations.of(context)!.jan,
+      AppLocalizations.of(context)!.feb,
+      AppLocalizations.of(context)!.mar,
+      AppLocalizations.of(context)!.apr,
+      AppLocalizations.of(context)!.may,
+      AppLocalizations.of(context)!.jun,
+      AppLocalizations.of(context)!.jul,
+      AppLocalizations.of(context)!.aug,
+      AppLocalizations.of(context)!.sep,
+      AppLocalizations.of(context)!.oct,
+      AppLocalizations.of(context)!.nov,
+      AppLocalizations.of(context)!.dec
+    ];
+    return "${dt.day} ${months[dt.month - 1]} ${dt.year}";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +179,7 @@ class _TaskTileState extends State<TaskTile> {
                         size: 16,
                       ))
                   : const SizedBox.shrink(),
-              (widget._task.period == "")
+              (widget._task.deadline == null)
                   ? Expanded(
                       flex: 50,
                       child: Padding(
@@ -205,7 +224,7 @@ class _TaskTileState extends State<TaskTile> {
                           maxLines: 3,
                         ),
                         subtitle: Text(
-                          widget._task.period,
+                          convertDateTime(widget._task.deadline!),
                           style: TextStyle(
                               color: (!_isChecked)
                                   ? const Color(0xFF007AFF)
