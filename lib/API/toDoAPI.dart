@@ -28,13 +28,13 @@ class ToDoAPI {
   }
 
   void addTask(Map<String, dynamic> taskMap) async {
-      await _instance.post(
-        '/list',
-        options: Options(
-          headers: {"X-Last-Known-Revision": 0},
-        ),
-        data: taskMap,
-      );
+    await _instance.post(
+      '/list',
+      options: Options(
+        headers: {"X-Last-Known-Revision": 0},
+      ),
+      data: taskMap,
+    );
   }
 
   void refreshAll(List<Map<String, dynamic>> lstWithTasks) async {
@@ -50,16 +50,14 @@ class ToDoAPI {
     );
   }
 
-  void refreshTask(String id, Map<String, dynamic> taskMap) async
-  {
+  void refreshTask(String id, Map<String, dynamic> taskMap) async {
     await _instance.post(
       '/list/$id',
       data: taskMap,
     );
   }
 
-  void deleteTask(String id) async
-  {
+  void deleteTask(String id) async {
     await _instance.delete('/list/$id');
   }
 }
