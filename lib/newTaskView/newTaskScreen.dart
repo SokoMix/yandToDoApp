@@ -21,6 +21,7 @@ class _NewTaskState extends State<NewTask> {
   final _scrollCtrl = ScrollController();
   late TextEditingController _priorityCtrl;
   bool _isScrolled = true;
+  bool _isUploadedDateTime = false;
   bool _emptyText = false;
   bool _isButtonDisabled = true;
   DateTime? _selectedDate;
@@ -88,6 +89,7 @@ class _NewTaskState extends State<NewTask> {
       setState(() {
         _isSwitched = true;
         _toDate = convertDateTime(date);
+        _selectedDate = date;
       });
     }
   }
@@ -110,7 +112,10 @@ class _NewTaskState extends State<NewTask> {
     if (_priorityCtrl.text == "") {
       _priorityCtrl.text = AppLocalizations.of(context)!.none;
     }
-    _setDate(widget._task?.deadline);
+    if (!_isUploadedDateTime) {
+      _setDate(widget._task?.deadline);
+      _isUploadedDateTime = true;
+    }
     return NotificationListener<ScrollNotification>(
       onNotification: (notif) {
         setState(() {
@@ -269,6 +274,7 @@ class _NewTaskState extends State<NewTask> {
                                       pickDate(context);
                                     } else {
                                       _toDate = "";
+                                      _selectedDate = null;
                                     }
                                   });
                                 },
@@ -304,6 +310,7 @@ class _NewTaskState extends State<NewTask> {
                                         pickDate(context);
                                       } else {
                                         _toDate = "";
+                                        _selectedDate = null;
                                       }
                                     });
                                   },

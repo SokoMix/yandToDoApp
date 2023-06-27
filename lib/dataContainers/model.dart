@@ -30,20 +30,19 @@ class Model {
     var jsonTasks = _localDatabase.getFromDB();
     int lastId = 0;
     int cnt = 0;
-    int compcCount = 0;
+    int compCount = 0;
     List<Task> tmp = [];
     if (jsonTasks != null) {
-      _tasks = jsonTasks.map((e) => Task.fromJson(json.decode(e))).toList()
-          as List<Task>;
+      _tasks = jsonTasks.map((e) => Task.fromJson(json.decode(e))).toList();
       cnt = _tasks.length;
       for (int i = 0; i < _tasks.length; i++) {
         tmp.add(Task.fromJson(json.decode(jsonTasks[i])));
         if (tmp[i].completed) {
-          compcCount++;
+          compCount++;
         }
         lastId = max(lastId, tmp[i].id);
       }
-      _completedCnt = compcCount;
+      _completedCnt = compCount;
       _count = cnt;
       _lastId = lastId + 1;
     }
