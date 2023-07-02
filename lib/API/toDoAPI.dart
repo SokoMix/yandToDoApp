@@ -1,15 +1,9 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 
 class ToDoAPI {
-  ToDoAPI();
+  ToDoAPI(this._instance);
 
-  final _instance = Dio(BaseOptions(
-    baseUrl: 'https://beta.mrdekk.ru/todobackend',
-    responseType: ResponseType.json,
-    contentType: ContentType.json.toString(),
-    headers: {"Authorization": "Bearer eonism"},
-  ));
+  final Dio _instance;
 
   Future<Map<String, dynamic>?> getTask(String id) async {
     try {
@@ -22,64 +16,93 @@ class ToDoAPI {
 
   Future<List<Map<String, dynamic>>?> getAllTasks() async {
     try {
-      final response = (await _instance.get('/list')).data["list"] as List<dynamic>;
+      final response =
+          (await _instance.get('/list')).data["list"] as List<dynamic>;
       List<Map<String, dynamic>> lst = [];
       for (int i = 0; i < response.length; i++) {
         lst.add(response[i]);
       }
       return lst;
     } catch (e) {
+      if (e is DioException) {
+        if (e.response?.statusCode == 404 || e.response == null) {
+          rethrow;
+        }
+      }
       return null;
     }
   }
 
-  void addTask(Map<String, dynamic> taskMap, int rev) async {
-    await _instance.post(
-      '/list',
-      options: Options(
-        headers: {"X-Last-Known-Revision": rev},
-      ),
-      data: { "status": 'ok',
-        "element" : taskMap},
-    );
+  Future<bool> addTask(Map<String, dynamic> taskMap, int rev) async {
+    try {
+      await _instance.post(
+        '/list',
+        options: Options(
+          headers: {"X-Last-Known-Revision": rev},
+        ),
+        data: {"status": 'ok', "element": taskMap},
+      );
+      return false;
+    } catch (e) {
+      return (e is DioException && e.response?.statusCode == 400);
+    }
   }
 
-  void refreshAll(List<Map<String, dynamic>> lstWithTasks, int rev) async {
-    await _instance.patch(
-      '/list',
-      options: Options(
-        headers: {"X-Last-Known-Revision": rev},
-      ),
-      data: {
-        "status": "ok",
-        "list": lstWithTasks,
-      },
-    );
+  Future<bool> refreshAll(
+      List<Map<String, dynamic>> lstWithTasks, int rev) async {
+    try {
+      await _instance.patch(
+        '/list',
+        options: Options(
+          headers: {"X-Last-Known-Revision": rev},
+        ),
+        data: {
+          "status": "ok",
+          "list": lstWithTasks,
+        },
+      );
+      return false;
+    } catch (e) {
+      return (e is DioException && e.response?.statusCode == 400);
+    }
   }
 
-  void refreshTask(String id, Map<String, dynamic> taskMap, int rev) async {
-    await _instance.put(
-      options: Options(
-        headers: {"X-Last-Known-Revision": rev},
-      ),
-      '/list/$id',
-      data: { "status": 'ok',
-        "element" : taskMap},
-    );
+  Future<bool> refreshTask(
+      String id, Map<String, dynamic> taskMap, int rev) async {
+    try {
+      await _instance.put(
+        options: Options(
+          headers: {"X-Last-Known-Revision": rev},
+        ),
+        '/list/$id',
+        data: {"status": 'ok', "element": taskMap},
+      );
+      return false;
+    } catch (e) {
+      return (e is DioException && e.response?.statusCode == 400);
+    }
   }
 
-  Future<int?> getRevision() async
-  {
+  Future<int?> getRevision() async {
+    try {
       Response response = await _instance.get('/list');
       return response.data["revision"];
+    } catch (e) {
+      return null;
+    }
   }
 
-  void deleteTask(String id, int rev) async {
-    await _instance.delete(
-      options: Options(
-        headers: {"X-Last-Known-Revision": rev},
-      ),
+  Future<bool> deleteTask(String id, int rev) async {
+    try {
+      await _instance.delete(
+        options: Options(
+          headers: {"X-Last-Known-Revision": rev},
+        ),
         '/list/$id',
-    );
+      );
+      return false;
+    } catch (e) {
+      return (e is DioException && e.response?.statusCode == 400);
+    }
   }
 }

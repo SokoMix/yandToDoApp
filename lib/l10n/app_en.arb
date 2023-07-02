@@ -22,5 +22,6 @@
     "oct" : "October",
     "nov" : "November",
     "dec" : "December",
-    "empty_case" : "Please complete a task."
+    "empty_case" : "Please complete a task.",
+    "connection_error" : "Connection error"
 }

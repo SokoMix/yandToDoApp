@@ -102,7 +102,8 @@ class _NewTaskState extends State<NewTask> {
       });
     }
     _inputCtrl = TextEditingController(text: widget._task?.action ?? "");
-    _priorityCtrl = TextEditingController(text: widget._task?.priority ?? "basic");
+    _priorityCtrl =
+        TextEditingController(text: widget._task?.priority ?? "basic");
     _priority = widget._task?.priority ?? "basic";
     super.initState();
   }
@@ -120,7 +121,6 @@ class _NewTaskState extends State<NewTask> {
       onNotification: (notif) {
         setState(() {
           _isScrolled = _scrollCtrl.offset <= 0;
-          debugPrint("$_isScrolled");
         });
         return false;
       },
@@ -219,10 +219,20 @@ class _NewTaskState extends State<NewTask> {
                         dropdownMenuEntries: [
                           DropdownMenuEntry(
                               value: "basic",
-                              label: AppLocalizations.of(context)!.none),
+                              label: AppLocalizations.of(context)!.none,
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .color)),
                           DropdownMenuEntry(
                               value: "low",
-                              label: AppLocalizations.of(context)!.low),
+                              label: AppLocalizations.of(context)!.low,
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .color)),
                           DropdownMenuEntry(
                               value: "important",
                               label: AppLocalizations.of(context)!.high,

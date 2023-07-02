@@ -32,7 +32,7 @@ class Task {
 
   Map<String, dynamic> toJson() => (deadline == null)
       ? {
-          "id": id,
+    "id": id,
           // уникальный идентификатор элемента STRING
           "text": action,
           // STRING

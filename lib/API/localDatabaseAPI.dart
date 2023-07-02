@@ -1,13 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalDatabase {
-  late SharedPreferences _db;
+  final SharedPreferences _db;
 
-  LocalDatabase();
-
-  Future<void> init() async {
-    _db = await SharedPreferences.getInstance();
-  }
+  LocalDatabase(this._db);
 
   void writeToDB(List<String> tasks, int revision) {
     _db.setStringList('tasks', tasks);

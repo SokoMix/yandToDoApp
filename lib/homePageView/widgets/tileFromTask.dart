@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:yandex_todo/homePageView/viewData/viewController.dart';
 import '../../app/customIcons.dart';
 import '../../controller/controller.dart';
 import '../../newTaskView/newTaskScreen.dart';
@@ -90,7 +91,7 @@ class _TaskTileState extends State<TaskTile> {
                           width: 18,
                           height: 18,
                           child: Material(
-                              color: const Color.fromRGBO(254, 216, 214, 1),
+                              color: Theme.of(context).canvasColor,
                               child: Checkbox(
                                 value: _isChecked,
                                 checkColor: Colors.white,
@@ -243,14 +244,7 @@ class _TaskTileState extends State<TaskTile> {
                 child: IconButton(
                   padding: const EdgeInsets.only(right: 15, left: 10),
                   constraints: const BoxConstraints(),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NewTask(
-                                  task: widget._task,
-                                )));
-                  },
+                  onPressed: () => Provider.of<HomePageProvider>(context, listen: false).onTaskTap(widget._task),
                   icon: Icon(
                     Icons.info_outline,
                     size: 25,

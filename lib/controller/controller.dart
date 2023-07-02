@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yandex_todo/API/toDoAPI.dart';
+import 'package:yandex_todo/API/localDatabaseAPI.dart';
+import 'package:yandex_todo/DI/containerDI.dart';
 import '../app/task.dart';
-import '../dataContainers/model.dart';
+import '../service/model.dart';
 import '../app/logger/logger.dart';
 
 class Controller with ChangeNotifier {
-  final MyLogger logger = MyLogger(); // через D/I
-  Model? _model = null;
+  MyLogger logger;
+  Model? _model;
+  final InstanceCollection _instanceCollection;
 
   List<Task> get getTasks => _model!.tasks;
 
@@ -13,45 +17,39 @@ class Controller with ChangeNotifier {
 
   int get completedCnt => _model!.completedCnt;
 
-  bool get isHide => _model!.isHide;
-
-  Controller();
-
-  set isHide(bool value) {
-    _model!.isHide = value;
-    notifyListeners();
-  }
+  Controller(this.logger, this._instanceCollection);
 
   Future<bool> init() async {
     if (_model == null) {
       _model = Model();
-      await _model!.init();
-      return true;
-    } else
-      return true;
+      await _instanceCollection.init();
+      await _model!.init(LocalDatabase(_instanceCollection.instanceSharPref),
+          ToDoAPI(_instanceCollection.instanceDio));
+    }
+    return true;
   }
 
-  void deleteTask(String? id) {
-      _model!.deleteTask(id);
-      _model!.saveToLocal();
-      notifyListeners();
-  }
-
-  void addTask(String action, String priority, String period, bool completed,
-      DateTime? deadline) {
-    _model!.addTask(action, priority, period, completed, deadline);
+  Future deleteTask(String? id) async {
+    await _model!.deleteTask(id);
     _model!.saveToLocal();
     notifyListeners();
   }
 
-  void changeTask(Task task, String action, String priority, String period,
-      DateTime? deadline) {
-    _model!.changeTask(task, action, priority, period, deadline);
+  Future addTask(String action, String priority, String period, bool completed,
+      DateTime? deadline) async {
+    await _model!.addTask(action, priority, period, completed, deadline);
     _model!.saveToLocal();
     notifyListeners();
   }
 
-  void changeActive(String? ind, bool isAdd) {
+  Future changeTask(Task task, String action, String priority, String period,
+      DateTime? deadline) async {
+    await _model!.changeTask(task, action, priority, period, deadline);
+    _model!.saveToLocal();
+    notifyListeners();
+  }
+
+  Future changeActive(String? ind, bool isAdd) async {
     _model!.setComp(ind);
     (isAdd) ? _model!.addCompleted() : _model!.delCompleted();
     logger.i("$ind\n");

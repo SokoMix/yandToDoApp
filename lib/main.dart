@@ -2,24 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'homePageView/homePage.dart';
+import 'package:yandex_todo/DI/containerDI.dart';
+import 'package:yandex_todo/app/logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'controller/controller.dart';
+import 'homePageView/viewData/viewController.dart';
+import 'navigation/routerDelegate.dart';
+import 'navigation/routerInformationParser.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _routerDelegate = MyRouterDelegate();
+  final _routeInformationParser = MyRouteInformationParser();
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return ChangeNotifierProvider<Controller>(
-        create: (context) => Controller(),
-        child: MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => Controller(MyLogger(), InstanceCollection())),
+        ChangeNotifierProvider(create: (context) => HomePageProvider()),
+      ],
+      child: MaterialApp.router(
+          routerDelegate: _routerDelegate,
           title: 'Flutter Demo',
           localizationsDelegates: const [
             AppLocalizations.delegate,
@@ -34,6 +46,7 @@ class MyApp extends StatelessWidget {
             cardColor: Colors.white,
             iconTheme: const IconThemeData(color: Color(0xFF007AFF)),
             fontFamily: 'Roboto',
+            canvasColor: const Color.fromRGBO(254, 216, 214, 1),
             disabledColor: const Color.fromRGBO(0, 0, 0, 0.15),
             textTheme: const TextTheme(
               displayLarge: TextStyle(
@@ -65,6 +78,7 @@ class MyApp extends StatelessWidget {
             cardColor: const Color(0xFF252528),
             disabledColor: const Color.fromRGBO(255, 255, 255, 0.15),
             fontFamily: 'Roboto',
+            canvasColor: const Color.fromRGBO(68, 43, 44, 1),
             textTheme: const TextTheme(
               displayLarge: TextStyle(
                   color: Colors.white,
@@ -88,8 +102,7 @@ class MyApp extends StatelessWidget {
                   letterSpacing: 0),
             ),
           ),
-          themeMode: ThemeMode.system,
-          home: const HomePage(),
-        ));
+          themeMode: ThemeMode.system),
+    );
   }
 }
