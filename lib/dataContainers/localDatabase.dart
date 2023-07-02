@@ -9,11 +9,12 @@ class LocalDatabase {
     _db = await SharedPreferences.getInstance();
   }
 
-  void writeToDB(List<String> tasks) {
+  void writeToDB(List<String> tasks, int revision) {
     _db.setStringList('tasks', tasks);
+    _db.setInt('rev', revision);
   }
 
-  List<String>? getFromDB() {
-    return _db.getStringList('tasks');
+  (List<String>?, int?) getFromDB() {
+    return (_db.getStringList('tasks'), _db.getInt('rev'));
   }
 }

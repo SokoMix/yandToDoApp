@@ -26,7 +26,7 @@ class _NewTaskState extends State<NewTask> {
   bool _isButtonDisabled = true;
   DateTime? _selectedDate;
   String _toDate = "";
-  String _priority = "";
+  String _priority = "basic";
 
   @override
   dispose() {
@@ -102,8 +102,8 @@ class _NewTaskState extends State<NewTask> {
       });
     }
     _inputCtrl = TextEditingController(text: widget._task?.action ?? "");
-    _priorityCtrl = TextEditingController(text: widget._task?.priority ?? "");
-    _priority = widget._task?.priority ?? "";
+    _priorityCtrl = TextEditingController(text: widget._task?.priority ?? "basic");
+    _priority = widget._task?.priority ?? "basic";
     super.initState();
   }
 
@@ -218,13 +218,13 @@ class _NewTaskState extends State<NewTask> {
                         ),
                         dropdownMenuEntries: [
                           DropdownMenuEntry(
-                              value: AppLocalizations.of(context)!.none,
+                              value: "basic",
                               label: AppLocalizations.of(context)!.none),
                           DropdownMenuEntry(
-                              value: AppLocalizations.of(context)!.low,
+                              value: "low",
                               label: AppLocalizations.of(context)!.low),
                           DropdownMenuEntry(
-                              value: AppLocalizations.of(context)!.high,
+                              value: "important",
                               label: AppLocalizations.of(context)!.high,
                               style: TextButton.styleFrom(
                                   foregroundColor: Colors.red)),

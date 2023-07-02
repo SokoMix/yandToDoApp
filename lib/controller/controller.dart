@@ -31,10 +31,10 @@ class Controller with ChangeNotifier {
       return true;
   }
 
-  void deleteTask(int id) {
-    _model!.deleteTask(id);
-    _model!.saveToLocal();
-    notifyListeners();
+  void deleteTask(String? id) {
+      _model!.deleteTask(id);
+      _model!.saveToLocal();
+      notifyListeners();
   }
 
   void addTask(String action, String priority, String period, bool completed,
@@ -51,7 +51,7 @@ class Controller with ChangeNotifier {
     notifyListeners();
   }
 
-  void changeActive(int ind, bool isAdd) {
+  void changeActive(String? ind, bool isAdd) {
     _model!.setComp(ind);
     (isAdd) ? _model!.addCompleted() : _model!.delCompleted();
     logger.i("$ind\n");

@@ -158,7 +158,13 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         } else if (!snapshot.hasError) {
-          return const CircularProgressIndicator();
+          return const Center(
+            child: SizedBox(
+              width: 80,
+              height: 80,
+              child: CircularProgressIndicator(),
+            ),
+          );
         } else {
           return Text(snapshot.error.toString());
         }

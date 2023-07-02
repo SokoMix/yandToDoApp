@@ -8,7 +8,7 @@ import '../../app/task.dart';
 
 class TaskTile extends StatefulWidget {
   final Task _task;
-  final int id;
+  final String? id;
 
   const TaskTile({Key? key, required this.id, required Task task})
       : _task = task,
@@ -82,7 +82,7 @@ class _TaskTileState extends State<TaskTile> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              (widget._task.priority == AppLocalizations.of(context)!.high)
+              (widget._task.priority == "important")
                   ? Padding(
                       padding:
                           const EdgeInsets.only(left: 20, top: 5, right: 10),
@@ -169,7 +169,7 @@ class _TaskTileState extends State<TaskTile> {
                         size: 16,
                       ))
                   : const SizedBox.shrink(),
-              (widget._task.priority == AppLocalizations.of(context)!.low)
+              (widget._task.priority == "low")
                   ? Padding(
                       padding: const EdgeInsets.only(top: 5, right: 2),
                       child: Icon(

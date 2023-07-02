@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class ToDoAPI {
+  ToDoAPI();
+
   final _instance = Dio(BaseOptions(
     baseUrl: 'https://beta.mrdekk.ru/todobackend',
     responseType: ResponseType.json,
@@ -20,28 +22,33 @@ class ToDoAPI {
 
   Future<List<Map<String, dynamic>>?> getAllTasks() async {
     try {
-      Response response = await _instance.get('/list');
-      return response.data["element"] as List<Map<String, dynamic>>;
+      final response = (await _instance.get('/list')).data["list"] as List<dynamic>;
+      List<Map<String, dynamic>> lst = [];
+      for (int i = 0; i < response.length; i++) {
+        lst.add(response[i]);
+      }
+      return lst;
     } catch (e) {
       return null;
     }
   }
 
-  void addTask(Map<String, dynamic> taskMap) async {
+  void addTask(Map<String, dynamic> taskMap, int rev) async {
     await _instance.post(
       '/list',
       options: Options(
-        headers: {"X-Last-Known-Revision": 0},
+        headers: {"X-Last-Known-Revision": rev},
       ),
-      data: taskMap,
+      data: { "status": 'ok',
+        "element" : taskMap},
     );
   }
 
-  void refreshAll(List<Map<String, dynamic>> lstWithTasks) async {
+  void refreshAll(List<Map<String, dynamic>> lstWithTasks, int rev) async {
     await _instance.patch(
       '/list',
       options: Options(
-        headers: {"X-Last-Known-Revision": 0},
+        headers: {"X-Last-Known-Revision": rev},
       ),
       data: {
         "status": "ok",
@@ -50,14 +57,29 @@ class ToDoAPI {
     );
   }
 
-  void refreshTask(String id, Map<String, dynamic> taskMap) async {
-    await _instance.post(
+  void refreshTask(String id, Map<String, dynamic> taskMap, int rev) async {
+    await _instance.put(
+      options: Options(
+        headers: {"X-Last-Known-Revision": rev},
+      ),
       '/list/$id',
-      data: taskMap,
+      data: { "status": 'ok',
+        "element" : taskMap},
     );
   }
 
-  void deleteTask(String id) async {
-    await _instance.delete('/list/$id');
+  Future<int?> getRevision() async
+  {
+      Response response = await _instance.get('/list');
+      return response.data["revision"];
+  }
+
+  void deleteTask(String id, int rev) async {
+    await _instance.delete(
+      options: Options(
+        headers: {"X-Last-Known-Revision": rev},
+      ),
+        '/list/$id',
+    );
   }
 }

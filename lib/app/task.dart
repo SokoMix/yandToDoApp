@@ -1,46 +1,46 @@
+import 'package:uuid/uuid.dart';
+
 class Task {
-  int id;
+  String? id;
   String action;
   String priority;
   bool completed;
   String period;
   DateTime? deadline;
 
-  Task(
-      {required this.action,
-      required this.priority,
-      required this.period,
-      required this.completed,
-      required this.id,
-      this.deadline});
+  Task({
+    this.id,
+    required this.action,
+    required this.priority,
+    required this.period,
+    required this.completed,
+    this.deadline,
+  }) {
+    id ??= const Uuid().v4();
+  }
 
   factory Task.fromJson(Map<String, dynamic> json) => Task(
-        id: int.parse(json["element"]["id"]),
-        action: json["element"]["text"],
-        priority: json["element"]["importance"],
-        deadline: json["element"]["deadline"] == null
+        id: json["id"],
+        action: json["text"],
+        priority: json["importance"],
+        deadline: json["deadline"] == null
             ? null
-            : DateTime.fromMillisecondsSinceEpoch(json["element"]["deadline"]),
+            : DateTime.fromMillisecondsSinceEpoch(json["deadline"]),
         period: "1234",
-        completed: bool.parse(json["element"]["done"]),
+        completed: json["done"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "status": "ok",
-        "element": {
-          "id": id.toString(),
+  Map<String, dynamic> toJson() => (deadline == null)
+      ? {
+          "id": id,
           // уникальный идентификатор элемента STRING
           "text": action,
           // STRING
           "importance": priority,
           // importance = low | basic | important STRING
-          "deadline": deadline == null
-              ? null
-              : deadline!.toUtc().millisecondsSinceEpoch,
-          // int64, может отсутствовать, тогда нет INT
-          "done": completed.toString(),
+          "done": completed,
           // BOOL
-          "color": "",
+          "color": "#FFFFFF",
           // может отсутствовать STRING
           "created_at": DateTime.now().toUtc().millisecondsSinceEpoch,
           // INT
@@ -48,6 +48,25 @@ class Task {
           // INT
           "last_updated_by": "iphone",
           // STRING
-        },
-      };
+        }
+      : {
+          "id": id,
+          // уникальный идентификатор элемента STRING
+          "text": action,
+          // STRING
+          "importance": priority,
+          // importance = low | basic | important STRING
+          "deadline": deadline!.toUtc().millisecondsSinceEpoch,
+          // int64, может отсутствовать, тогда нет INT
+          "done": completed,
+          // BOOL
+          "color": "#FFFFFF",
+          // может отсутствовать STRING
+          "created_at": DateTime.now().toUtc().millisecondsSinceEpoch,
+          // INT
+          "changed_at": DateTime.now().toUtc().millisecondsSinceEpoch,
+          // INT
+          "last_updated_by": "iphone",
+          // STRING
+        };
 }
