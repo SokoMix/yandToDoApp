@@ -42,4 +42,4 @@ jobs:
           script: flutter test integration_test --verbose
 
       - name: Run flutter lints
-          run: flutter analyze
+        run: flutter analyze
