@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:yandex_todo/homePageView/viewData/viewController.dart';
 import '../../app/customIcons.dart';
 import '../../controller/controller.dart';
-import '../../newTaskView/newTaskScreen.dart';
 import '../../app/task.dart';
 
 class TaskTile extends StatefulWidget {

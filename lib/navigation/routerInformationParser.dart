@@ -19,11 +19,6 @@ class MyRouteInformationParser extends RouteInformationParser<NavigationState> {
     }
 
     if (uri.pathSegments.length == 2) {
-      final itemId = uri.pathSegments[1];
-
-      // if (uri.pathSegments[0] == Routes.task) {
-      //   return NavigationState.task(itemId); // как тут понять существует ли таск???
-      // }
 
       return NavigationState.unknown();
     }

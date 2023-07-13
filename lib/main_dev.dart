@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'controller/controller.dart';
 import 'homePageView/viewData/viewController.dart';
 import 'navigation/routerDelegate.dart';
-import 'navigation/routerInformationParser.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +17,6 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _routerDelegate = MyRouterDelegate();
-  final _routeInformationParser = MyRouteInformationParser();
 
   @override
   Widget build(BuildContext context) {

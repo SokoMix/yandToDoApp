@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'package:yandex_todo/main_dev.dart' as runFile;
+import 'package:yandex_todo/main_dev.dart' as run_file;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('Launching app', (WidgetTester tester) async {
-    runFile.main();
+    run_file.main();
     await tester.pumpAndSettle();
     await Future.delayed(const Duration(seconds: 3));
     expect(find.text('Мои дела'), findsOneWidget);
@@ -17,7 +17,7 @@ void main() {
   });
 
   testWidgets("Adding a task", (WidgetTester tester) async {
-    runFile.main();
+    run_file.main();
     await tester.pumpAndSettle();
     await tester.dragUntilVisible(find.bySemanticsLabel("Новое"),
         find.byType(Scaffold), const Offset(0, -100));

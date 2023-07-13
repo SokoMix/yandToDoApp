@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:yandex_todo/controller/controller.dart';
 import 'package:yandex_todo/homePageView/viewData/viewController.dart';
 import 'package:yandex_todo/navigation/routerDelegate.dart';
-import 'package:yandex_todo/navigation/routerInformationParser.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +17,6 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _routerDelegate = MyRouterDelegate();
-  final _routeInformationParser = MyRouteInformationParser();
 
   @override
   Widget build(BuildContext context) {
