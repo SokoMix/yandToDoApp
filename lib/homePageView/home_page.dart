@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yandex_todo/controller/controller.dart';
-import 'package:yandex_todo/homePageView/viewData/viewController.dart';
-import 'package:yandex_todo/homePageView/widgets/errorButton.dart';
-import 'package:yandex_todo/homePageView/widgets/myAppBar.dart';
-import 'package:yandex_todo/homePageView/widgets/myTaskColumn.dart';
+import 'package:yandex_todo/homePageView/viewData/view_controller.dart';
+import 'package:yandex_todo/homePageView/widgets/error_button.dart';
+import 'package:yandex_todo/homePageView/widgets/my_app_bar.dart';
+import 'package:yandex_todo/homePageView/widgets/my_task_column.dart';
 import '../app/task.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,7 +49,6 @@ class _HomePageState extends State<HomePage> {
               return false;
             },
             child: Scaffold(
-
               body: CustomScrollView(
                 controller: _scrollController,
                 slivers: const [

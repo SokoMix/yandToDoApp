@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yandex_todo/API/localDatabaseAPI.dart';
-import 'package:yandex_todo/API/toDoAPI.dart';
+import 'package:yandex_todo/API/local_database_api.dart';
+import 'package:yandex_todo/API/todo_api.dart';
 import 'package:yandex_todo/app/task.dart';
 import 'package:yandex_todo/service/model.dart';
 import 'package:mockito/mockito.dart';

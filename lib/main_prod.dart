@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:yandex_todo/DI/containerDI.dart';
+import 'package:yandex_todo/DI/container_di.dart';
 import 'package:yandex_todo/app/logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'controller/controller.dart';
-import 'homePageView/viewData/viewController.dart';
-import 'navigation/routerDelegate.dart';
+import 'homePageView/viewData/view_controller.dart';
+import 'navigation/router_delegate.dart';
 
 void main() {
   FlavorConfig(
-      name: "dev",
-      color: Colors.red,
-      location: BannerLocation.bottomStart,
+    name: "dev",
+    color: Colors.red,
+    location: BannerLocation.bottomStart,
   );
   runApp(MyApp());
 }
@@ -34,18 +33,12 @@ class MyApp extends StatelessWidget {
             create: (context) => Controller(MyLogger(), InstanceCollection())),
         ChangeNotifierProvider(create: (context) => HomePageProvider()),
       ],
-      child: FlavorBanner(
-    color: Colors.blue,
-    location: BannerLocation.topStart,
-    child: MaterialApp.router(
+      child: MaterialApp.router(
           routerDelegate: _routerDelegate,
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
           theme: ThemeData(
@@ -111,6 +104,6 @@ class MyApp extends StatelessWidget {
             ),
           ),
           themeMode: ThemeMode.system),
-    ));
+    );
   }
 }

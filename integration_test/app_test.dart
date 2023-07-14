@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'package:yandex_todo/main_dev.dart' as run_file;
+import 'test_main.dart' as run_file;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

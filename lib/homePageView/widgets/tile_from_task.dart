@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:yandex_todo/homePageView/viewData/viewController.dart';
-import '../../app/customIcons.dart';
+import 'package:yandex_todo/homePageView/viewData/view_controller.dart';
+import '../../app/custom_icons.dart';
 import '../../controller/controller.dart';
 import '../../app/task.dart';
 
@@ -243,7 +243,9 @@ class _TaskTileState extends State<TaskTile> {
                 child: IconButton(
                   padding: const EdgeInsets.only(right: 15, left: 10),
                   constraints: const BoxConstraints(),
-                  onPressed: () => Provider.of<HomePageProvider>(context, listen: false).onTaskTap(widget._task),
+                  onPressed: () =>
+                      Provider.of<HomePageProvider>(context, listen: false)
+                          .onTaskTap(widget._task),
                   icon: Icon(
                     Icons.info_outline,
                     size: 25,

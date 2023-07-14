@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/controller.dart';
-import '../viewData/viewController.dart';
+import '../viewData/view_controller.dart';
 
 class MyAppBar extends StatefulWidget {
   const MyAppBar({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:yandex_todo/API/toDoAPI.dart';
-import 'package:yandex_todo/API/localDatabaseAPI.dart';
-import 'package:yandex_todo/DI/containerDI.dart';
+import 'package:yandex_todo/API/todo_api.dart';
+import 'package:yandex_todo/API/local_database_api.dart';
+import 'package:yandex_todo/DI/container_di.dart';
 import '../app/task.dart';
 import '../service/model.dart';
 import '../app/logger/logger.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yandex_todo/homePageView/homePage.dart';
-import 'package:yandex_todo/newTaskView/newTaskScreen.dart';
+import 'package:yandex_todo/homePageView/home_page.dart';
+import 'package:yandex_todo/newTaskView/new_task_screen.dart';
 import '../app/task.dart';
-import 'navigatorState.dart';
+import 'navigator_state.dart';
 
 class MyRouterDelegate extends RouterDelegate<NavigationState>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<NavigationState> {

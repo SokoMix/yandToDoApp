@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'navigatorState.dart';
+import 'navigator_state.dart';
 import 'routes.dart';
 
 class MyRouteInformationParser extends RouteInformationParser<NavigationState> {
@@ -19,7 +19,6 @@ class MyRouteInformationParser extends RouteInformationParser<NavigationState> {
     }
 
     if (uri.pathSegments.length == 2) {
-
       return NavigationState.unknown();
     }
 

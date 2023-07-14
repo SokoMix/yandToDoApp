@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../viewData/viewController.dart';
+import '../viewData/view_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ErrorButton extends StatelessWidget {

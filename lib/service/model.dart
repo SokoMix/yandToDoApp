@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:yandex_todo/API/toDoAPI.dart';
+import 'package:yandex_todo/API/todo_api.dart';
 import '../app/task.dart';
-import '../API/localDatabaseAPI.dart';
+import '../API/local_database_api.dart';
 
 class Model {
   List<Task> _tasks = [];
