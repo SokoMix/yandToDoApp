@@ -41,7 +41,7 @@ jobs:
           GOOGLE_JSON: ${{ secrets.GOOGLE_JSON }}
         run: echo "$GOOGLE_JSON" > android/app/google-services.json
 
-      - run: flutter build apk
+      - run: flutter build apk lib/main_prod.dart
       - uses: actions/upload-artifact@v1
         with:
           name: release-apk

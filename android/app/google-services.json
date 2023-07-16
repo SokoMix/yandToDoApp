@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1074445123137",
+    "project_id": "yandtodo",
+    "storage_bucket": "yandtodo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074445123137:android:3277aa54b6eb86ebb210c0",
+        "android_client_info": {
+          "package_name": "com.example.yandex_todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074445123137-ettmv2tl4ua7qvl56t3n0298kflv7k6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD-fzs2PN1h0VvvZJqWrkRZ0pJuISB7gM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074445123137-ettmv2tl4ua7qvl56t3n0298kflv7k6t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1074445123137-4ut4d1lm7d4mjq3d7ltsqijaivthe74g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yandexTodo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074445123137:android:ee35f189437bc879b210c0",
+        "android_client_info": {
+          "package_name": "com.sokomix.yandToDo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074445123137-ettmv2tl4ua7qvl56t3n0298kflv7k6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD-fzs2PN1h0VvvZJqWrkRZ0pJuISB7gM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074445123137-ettmv2tl4ua7qvl56t3n0298kflv7k6t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1074445123137-4ut4d1lm7d4mjq3d7ltsqijaivthe74g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yandexTodo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
