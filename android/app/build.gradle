@@ -61,18 +61,17 @@ android {
         }
     }
 
-    flavorDimensions "dev"
-    flavorDimensions "prod"
+    flavorDimensions "flav"
 
     productFlavors {
         dev {
-            dimension "dev"
+            dimension "flav"
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
         }
 
         prod {
-            dimension "prod"
+            dimension "flav"
             applicationIdSuffix ".prod"
             versionNameSuffix "-prod"
         }
