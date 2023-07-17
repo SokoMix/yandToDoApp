@@ -1,3 +1,6 @@
+import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
@@ -5,11 +8,18 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:yandex_todo/DI/container_di.dart';
 import 'package:yandex_todo/app/logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:yandex_todo/screens/homePageView/viewData/view_controller.dart';
 import 'controller/controller.dart';
-import 'homePageView/viewData/view_controller.dart';
 import 'navigation/router_delegate.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
   FlavorConfig(
     name: "dev",
     color: Colors.red,

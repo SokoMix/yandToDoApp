@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../app/task.dart';
+import '../../../app/task.dart';
 
 class HomePageProvider with ChangeNotifier {
   bool _isHide = false;

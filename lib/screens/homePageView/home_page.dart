@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yandex_todo/controller/controller.dart';
-import 'package:yandex_todo/homePageView/viewData/view_controller.dart';
-import 'package:yandex_todo/homePageView/widgets/error_button.dart';
-import 'package:yandex_todo/homePageView/widgets/my_app_bar.dart';
-import 'package:yandex_todo/homePageView/widgets/my_task_column.dart';
-import '../app/task.dart';
+import 'package:yandex_todo/screens/homePageView/viewData/view_controller.dart';
+import 'package:yandex_todo/screens/homePageView/widgets/error_button.dart';
+import 'package:yandex_todo/screens/homePageView/widgets/my_app_bar.dart';
+import 'package:yandex_todo/screens/homePageView/widgets/my_task_column.dart';
+import '../../app/task.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage(

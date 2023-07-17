@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAD-fzs2PN1h0VvvZJqWrkRZ0pJuISB7gM',
-    appId: '1:1074445123137:android:3277aa54b6eb86ebb210c0',
+    appId: '1:1074445123137:android:ee35f189437bc879b210c0',
     messagingSenderId: '1074445123137',
     projectId: 'yandtodo',
     storageBucket: 'yandtodo.appspot.com',
@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1074445123137',
     projectId: 'yandtodo',
     storageBucket: 'yandtodo.appspot.com',
-    iosClientId: '1074445123137-4ut4d1lm7d4mjq3d7ltsqijaivthe74g.apps.googleusercontent.com',
+    iosClientId:
+        '1074445123137-4ut4d1lm7d4mjq3d7ltsqijaivthe74g.apps.googleusercontent.com',
     iosBundleId: 'com.example.yandexTodo',
   );
 }

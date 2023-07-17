@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yandex_todo/homePageView/widgets/tile_from_task.dart';
-import '../../app/task.dart';
-import '../../controller/controller.dart';
+import 'package:yandex_todo/screens/homePageView/widgets/tile_from_task.dart';
+import '../../../app/task.dart';
+import '../../../controller/controller.dart';
 import '../viewData/view_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

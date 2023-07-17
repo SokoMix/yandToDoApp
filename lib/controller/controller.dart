@@ -11,6 +11,8 @@ class Controller with ChangeNotifier {
   Model? _model;
   final InstanceCollection _instanceCollection;
 
+  InstanceCollection get instanceCollection => _instanceCollection;
+
   List<Task> get getTasks => _model!.tasks;
 
   int get getCount => _model!.count;
@@ -32,6 +34,7 @@ class Controller with ChangeNotifier {
   Future deleteTask(String? id) async {
     await _model!.deleteTask(id);
     _model!.saveToLocal();
+    _instanceCollection.fbAnalytics.deletedTask(id!);
     notifyListeners();
   }
 
@@ -39,6 +42,8 @@ class Controller with ChangeNotifier {
       DateTime? deadline) async {
     await _model!.addTask(action, priority, period, completed, deadline);
     _model!.saveToLocal();
+    _instanceCollection.fbAnalytics
+        .newTask(action, priority, period, completed, deadline);
     notifyListeners();
   }
 
@@ -46,6 +51,8 @@ class Controller with ChangeNotifier {
       DateTime? deadline) async {
     await _model!.changeTask(task, action, priority, period, deadline);
     _model!.saveToLocal();
+    _instanceCollection.fbAnalytics
+        .changedTask(action, priority, period, deadline);
     notifyListeners();
   }
 
@@ -54,6 +61,7 @@ class Controller with ChangeNotifier {
     (isAdd) ? _model!.addCompleted() : _model!.delCompleted();
     logger.i("$ind\n");
     _model!.saveToLocal();
+    _instanceCollection.fbAnalytics.changedActive(ind!, isAdd);
     notifyListeners();
   }
 }

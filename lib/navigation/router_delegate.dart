@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yandex_todo/homePageView/home_page.dart';
-import 'package:yandex_todo/newTaskView/new_task_screen.dart';
 import '../app/task.dart';
+import '../screens/homePageView/home_page.dart';
+import '../screens/newTaskView/new_task_screen.dart';
 import 'navigator_state.dart';
 
 class MyRouterDelegate extends RouterDelegate<NavigationState>

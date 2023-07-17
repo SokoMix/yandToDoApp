@@ -6,8 +6,8 @@ import 'package:yandex_todo/DI/container_di.dart';
 import 'package:yandex_todo/app/logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:yandex_todo/controller/controller.dart';
-import 'package:yandex_todo/homePageView/viewData/view_controller.dart';
 import 'package:yandex_todo/navigation/router_delegate.dart';
+import 'package:yandex_todo/screens/homePageView/viewData/view_controller.dart';
 
 void main() {
   runApp(MyApp());

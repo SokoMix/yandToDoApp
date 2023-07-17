@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yandex_todo/analytics/fb_analytics.dart';
 
 class InstanceCollection {
   final _instanceDio = Dio(BaseOptions(
@@ -19,4 +20,8 @@ class InstanceCollection {
   Future<void> init() async {
     _instanceSharPref = await SharedPreferences.getInstance();
   }
+
+  final _fbAnalytics = FbAnalytics();
+
+  get fbAnalytics => _fbAnalytics;
 }

@@ -21,6 +21,17 @@ v3:
 - All mistakes from the backend are handling
 - Now, navigation realized with Navigator 2.0!
 
+v4:
+
+- Added 2 flavors: dev and prod.
+
+Dev run: flutter run --flavor dev --target lib/main_dev.dart
+Prod run: flutter run --flavor prod --target lib/main_prod.dart
+
+- Added Firebase Crashlytics and Analytics
+- Added landscape mode and supporting for big screens
+- Added Github CI with distribution to Firebase App Distribution (link to join testing: https://appdistribution.firebase.dev/i/ece720b38173ca66)
+
 ### Screenshots
 
 <image src = "screenshots/scr1.jpeg">

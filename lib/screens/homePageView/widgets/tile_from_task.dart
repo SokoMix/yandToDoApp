@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:yandex_todo/homePageView/viewData/view_controller.dart';
-import '../../app/custom_icons.dart';
-import '../../controller/controller.dart';
-import '../../app/task.dart';
+
+import '../../../app/custom_icons.dart';
+import '../../../app/task.dart';
+import '../../../controller/controller.dart';
+import '../viewData/view_controller.dart';
 
 class TaskTile extends StatefulWidget {
   final Task _task;
