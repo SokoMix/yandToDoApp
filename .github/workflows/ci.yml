@@ -52,4 +52,4 @@ jobs:
         with:
           appId: ${{secrets.FIRE_ID}}
           token: ${{secrets.FIRE_TOKEN}}
-          file: build/app/outputs/flutter-apk/app.apk
+          file: build/app/outputs/flutter-apk/app-prod-release.apk
