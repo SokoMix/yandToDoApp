@@ -45,7 +45,7 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: release-apk
-          path: build/app/outputs/apk/release/app-prod-release.apk
+          path: build/app/outputs/apk/prod/release/app-prod-release.apk
 
       - name: Uploading to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
