@@ -25,6 +25,12 @@ class Controller with ChangeNotifier {
     if (_model == null) {
       _model = Model();
       await _instanceCollection.init();
+      _color = _instanceCollection.remoteConfig.getString('color');
+      _instanceCollection.remoteConfig.onConfigUpdated.listen((event) async {
+        await _instanceCollection.remoteConfig.activate();
+        _color = _instanceCollection.remoteConfig.getString('color');
+        notifyListeners();
+      });
       await _model!.init(LocalDatabase(_instanceCollection.instanceSharPref),
           ToDoAPI(_instanceCollection.instanceDio));
     }
@@ -64,4 +70,8 @@ class Controller with ChangeNotifier {
     _instanceCollection.fbAnalytics.changedActive(ind!, isAdd);
     notifyListeners();
   }
+
+  String _color = "0xFFFF3B30";
+
+  String get color => _color;
 }

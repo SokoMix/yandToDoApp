@@ -91,17 +91,17 @@ class _TaskTileState extends State<TaskTile> {
                           width: 18,
                           height: 18,
                           child: Material(
-                              color: Theme.of(context).canvasColor,
+                              color: Color(int.parse(context.watch<Controller>().color)).withAlpha(30),
                               child: Checkbox(
                                 value: _isChecked,
                                 checkColor: Colors.white,
                                 activeColor: Colors.green,
                                 side: MaterialStateBorderSide.resolveWith(
                                     (states) => (!_isChecked)
-                                        ? const BorderSide(
+                                        ? BorderSide(
                                             width: 2.2,
                                             color:
-                                                Color.fromRGBO(252, 33, 37, 1))
+                                            Color(int.parse(context.watch<Controller>().color)))
                                         : const BorderSide(
                                             width: 2.2,
                                             color: Color.fromRGBO(0, 0, 0, 0))),
@@ -159,13 +159,13 @@ class _TaskTileState extends State<TaskTile> {
                         ),
                       ),
                     ),
-              (widget._task.priority == AppLocalizations.of(context)!.high)
+              (widget._task.priority == 'important')
                   ? Padding(
                       padding: const EdgeInsets.only(top: 5, right: 2),
                       child: Icon(
                         CustomIcons.highIcon,
                         color: (!_isChecked)
-                            ? const Color(0xFFFF3B30)
+                            ? Color(int.parse(context.watch<Controller>().color))
                             : Theme.of(context).textTheme.bodySmall!.color,
                         size: 16,
                       ))
