@@ -11,6 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:yandex_todo/screens/homePageView/viewData/view_controller.dart';
 import 'controller/controller.dart';
 import 'navigation/router_delegate.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +51,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate
           ],
           supportedLocales: AppLocalizations.supportedLocales,
           theme: ThemeData(
